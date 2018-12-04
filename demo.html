@@ -1,0 +1,59 @@
+
+<!doctype HTML>
+<html>
+<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+<script src="ARjs.js"></script>			<!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script> -->
+	<body style='margin : 0px; overflow: hidden;'>
+		<a-scene embedded arjs> 	<!-- ="trackingMethod: best; debugUIEnabled: false"> -->
+			<a-assets>
+      				<a-asset-item id="mtl" src="https://cdn.glitch.com/b57e6f01-0eed-4775-bd9a-9951d1f0c7ab%2Fmaterials.mtl?1499698177296"></a-asset-item>
+      				<a-asset-item id="obj" src="https://cdn.glitch.com/b57e6f01-0eed-4775-bd9a-9951d1f0c7ab%2Fmodel.obj?1499698177926"></a-asset-item>
+    			</a-assets>
+
+		<!--	<a-assets>								-->
+		<!--		<a-asset-item id="snake" src="snake.gltf"></a-asset-item>	-->
+		<!--		<a-asset-item id="snakeobj" src="snake.obj"></a-asset-item>	-->
+		<!--		<a-asset-item id="snakemtl" src="snakemat.mtl"></a-asset-item>	-->
+		<!--	</a-assets>
+ 								-->
+			<a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/vettorazi/aframe-gltf-models/master/markerv6.patt">
+				<a-box position='0 0.5 0' material='color: red; opacity: 0.3'></a-box>
+			</a-marker>
+			<a-marker preset="custom" type="pattern" url="https://drive.google.com/file/d/1VH6Kn9yZquxB8O1Iw8EjzLwLtZVALYOK/view?usp=sharing">
+				<a-box position='0 0.5 0' material='color: blue; opacity: 0.5'></a-box>
+			</a-marker>
+			<a-marker preset="hiro">
+		<!--		<a-text value="ta-da!"></a-text>					-->
+				<a-box position='0 0.5 0' material='color: gold; opacity: 0.5'></a-box>	
+		<!--		<a-entity obj-model="obj: #obj; mtl: #mtl;" shadow="recieve: false;"></a-entity>-->		
+			</a-marker>
+			<a-entity camera></a-entity>
+		</a-scene>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <img src="data61Fat.jpg" alt="not found"></img>
+type="pattern" patternUrl="data61Fat.patt">
+preset="hiro">
+
+<a-marker preset="kanji">
+<a-box position='0 0.5 0' material='color: blue; opacity: 0.5'></a-box>
+</a-marker>
+https://aframe.io/releases/0.6.1/aframe.min.js>
+https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js>
+https://raw.githubusercontent.com/vettorazi/aframe-gltf-models/master/markerv6 sniper>
+https://raw.githubusercontent.com/vettorazi/aframe-gltf-models/master/markerv6.patt
+<script src="aframe.js"></script>
+<script src="ARjs.js"></script> -->
