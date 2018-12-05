@@ -6,12 +6,10 @@
 		<a-scene embedded arjs> 
 
 			<!-- Import object assets -->
-		<!--	<a-assets>
+			<a-assets>
       				<a-asset-item id="mtl" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/snakemat.mtl"></a-asset-item>
       				<a-asset-item id="obj" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/snake.obj"></a-asset-item>
     			</a-assets> 
-		This would be used with 
-		-->
 
 			<!-- Recognise hex image -->
 			<a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/hexP.patt">
@@ -26,8 +24,7 @@
 				<!-- Overlay box -->
 		<!--		<a-box position='0 0.5 0' material='color: gold; opacity: 0.5'></a-box>	-->
 				<!-- Overlay custom asset -->
-				<a-entity obj-model="obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/snake.obj);
-					 mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/snakemat.mtl);" shadow="recieve: false;"></a-entity>		
+				<a-entity obj-model="obj: #obj; mtl: #mtl;" shadow="recieve: false;"></a-entity>
 			</a-marker>
 			<!-- Initiate camera -->
 			<a-entity camera></a-entity>
