@@ -1,31 +1,32 @@
 <!doctype HTML>
 <html>
 <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/ARjs.js"></script>	<!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script> -->
+<script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/ARjs.js"></script>
 	<body style='margin : 0px; overflow: hidden;'>
-		<a-scene embedded arjs> 	<!-- ="trackingMethod: best; debugUIEnabled: false"> -->
+		<a-scene embedded arjs> 
+
+			<!-- Import object assets -->
 			<a-assets>
       				<a-asset-item id="mtl" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/snakemat.mtl"></a-asset-item>
       				<a-asset-item id="obj" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/snake.obj"></a-asset-item>
     			</a-assets>
 
-		<!--	<a-assets>								-->
-		<!--		<a-asset-item id="snake" src="snake.gltf"></a-asset-item>	-->
-		<!--		<a-asset-item id="snakeobj" src="snake.obj"></a-asset-item>	-->
-		<!--		<a-asset-item id="snakemtl" src="snakemat.mtl"></a-asset-item>	-->
-		<!--	</a-assets>
- 								-->
+			<!-- Recognise hex image -->
 			<a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/ARjs_init/hexP.patt">
+				<!-- Overlay box -->
 				<a-box position='0 0.5 0' material='color: red; opacity: 0.3'></a-box>
 			</a-marker>
-			<a-marker preset="custom" type="pattern" url="https://drive.google.com/file/d/1VH6Kn9yZquxB8O1Iw8EjzLwLtZVALYOK/view?usp=sharing">
-				<a-box position='0 0.5 0' material='color: blue; opacity: 0.5'></a-box>
-			</a-marker>
+
+			<!-- Recognise hiro image -->
 			<a-marker preset="hiro">
+				<!-- Overlay text -->
 		<!--		<a-text value="ta-da!"></a-text>					-->
+				<!-- Overlay box -->
 		<!--		<a-box position='0 0.5 0' material='color: gold; opacity: 0.5'></a-box>	-->
+				<!-- Overlay custom asset -->
 				<a-entity obj-model="obj: #obj; mtl: #mtl;" shadow="recieve: false;"></a-entity>		
 			</a-marker>
+			<!-- Initiate camera -->
 			<a-entity camera></a-entity>
 		</a-scene>
 	</body>
