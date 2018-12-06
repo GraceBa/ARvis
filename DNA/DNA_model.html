@@ -2,8 +2,32 @@
 <html>
 <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/ARjs.js"></script>
+
+<!-- Custom js events -->
+<script src="HideControl.js"></script>
+
 	<body style='margin : 0px; overflow: hidden;'>
-		<a-scene embedded arjs> 
+		<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'> 
+
+			<div style='position: fixed; bottom: 10px; width:100%; text-align: center; z-index: 1;'>
+				<input onclick="toggleButton()" id="myInputButton" type="button" value="Hide figure">
+			</div>
+			<script type="text/javascript">
+                function toggleButton(){
+			        if(document.getElementById('myInputButton').value == 'Hide figure'){
+			            var label = 'Show figure';
+			            //document.querySelector('a-marker').object3D.visible = true;
+			            document.getElementById('VisibleImage').innerHTML = '';
+				    }
+				    else{
+			            var label = 'Hide figure';
+			            //document.querySelector('a-marker').object3D.visible = false;
+			            document.getElementById('VisibleImage').innerHTML = '<a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0" scale="1"></a-entity> <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0" scale="1"></a-entity>';
+				    }
+			        document.getElementById('myInputButton').value = label;
+                }
+		    </script>
+
 
 			<!-- Import object assets -->
 			<a-assets>
@@ -17,14 +41,19 @@
     			</a-assets> 
 
 			<!-- Recognise hex image -->
-			<a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/hexP.patt">
-				<!-- Overlay box -->
-				<a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0"></a-entity>
-				<a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0"></a-entity>
+			<a-marker id="VisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/hexP.patt">
+				<!-- Overlay dna -->
+				<a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0" scale="1"></a-entity>
+				<a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0" scale="1"></a-entity>
 			</a-marker>
 
 			<!-- Initiate camera -->
 			<a-entity camera></a-entity>
 		</a-scene>
+
+		<!-- User control -->
+		<button>
+		</button>
+
 	</body>
 </html>
