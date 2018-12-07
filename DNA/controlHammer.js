@@ -9,10 +9,10 @@
       var pinch = new Hammer.Pinch();
       hammertime.add(pinch); // add it to the Manager instance
       
- /*     hammertime.on('pan', (ev) => {
+      hammertime.on('pan', (ev) => {
         if (!this.markerVisible) { return;}
         let rotation = model.getAttribute("rotation")
-        switch(ev.direction) {
+   /*     switch(ev.direction) {
           case 2:
             rotation.y = rotation.y + 4
             break;
@@ -27,16 +27,17 @@
             break;
           default:
             break;
-        }
+        } */
         model.setAttribute("rotation", rotation)
 		model2.setAttribute("rotation", rotation)
-      }); */
+      }); 
       
       hammertime.on("pinch", (ev) => {
       	if (!this.markerVisible) { return; }
+		  let initialScale = model.getAttribute("scale")
           let scale = {x:ev.scale, y:ev.scale, z:ev.scale}
-          model.setAttribute("scale", scale);
-		  model2.setAttribute("scale", scale);
+          model.setAttribute("scale", initialScale + scale);
+		  model2.setAttribute("scale", initialScale + scale);
 
       });
         },
