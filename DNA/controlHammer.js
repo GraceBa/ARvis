@@ -9,7 +9,7 @@
       var pinch = new Hammer.Pinch();
       hammertime.add(pinch); // add it to the Manager instance
       
-      hammertime.on('pan', (ev) => {
+ /*     hammertime.on('pan', (ev) => {
         if (!this.markerVisible) { return;}
         let rotation = model.getAttribute("rotation")
         switch(ev.direction) {
@@ -30,7 +30,7 @@
         }
         model.setAttribute("rotation", rotation)
 		model2.setAttribute("rotation", rotation)
-      });
+      }); */
       
       hammertime.on("pinch", (ev) => {
       	if (!this.markerVisible) { return; }
