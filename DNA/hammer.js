@@ -560,7 +560,7 @@ function computeInputData(manager, input) {
     input.overallVelocity = (abs(overallVelocity.x) > abs(overallVelocity.y)) ? overallVelocity.x : overallVelocity.y;
 
     input.scale = firstMultiple ? getScale(firstMultiple.pointers, pointers) : 1;
-  //  input.rotation = firstMultiple ? getRotation(firstMultiple.pointers, pointers) : 0;
+    input.rotation = firstMultiple ? getRotation(firstMultiple.pointers, pointers) : 0;
 
     input.maxPointers = !session.prevInput ? input.pointers.length : ((input.pointers.length >
         session.prevInput.maxPointers) ? input.pointers.length : session.prevInput.maxPointers);
@@ -758,9 +758,9 @@ function getAngle(p1, p2, props) {
  * @param {Array} end array of pointers
  * @return {Number} rotation
  */
-//function getRotation(start, end) {
-//    return getAngle(end[1], end[0], PROPS_CLIENT_XY) + getAngle(start[1], start[0], PROPS_CLIENT_XY);
-//}
+function getRotation(start, end) {
+    return getAngle(end[1], end[0], PROPS_CLIENT_XY) + getAngle(start[1], start[0], PROPS_CLIENT_XY);
+}
 
 /**
  * calculate the scale factor between two pointersets
