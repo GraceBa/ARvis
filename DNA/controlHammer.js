@@ -1,9 +1,9 @@
         AFRAME.registerComponent("foo",{
         init:function() {
           var element = document.querySelector('body');
-          this.marker = document.querySelector('a-marker')
+          this.marker = document.querySelector('a-marker');
           var model = document.getElementById('dnaA');
-          var model2 = document.getElementById('dnaB')
+          var model2 = document.getElementById('dnaB');
           this.markerVisible = false
       var hammertime = new Hammer(element);
       var pinch = new Hammer.Pinch();
@@ -12,7 +12,7 @@
       hammertime.on('pan', (ev) => {
         if (!this.markerVisible) { return;}
         let rotation = model.getAttribute("rotation")
-   /*     switch(ev.direction) {
+        switch(ev.direction) {
           case 2:
             rotation.y = rotation.y + 4
             break;
@@ -27,7 +27,7 @@
             break;
           default:
             break;
-        } */
+        } 
         model.setAttribute("rotation", rotation)
 		model2.setAttribute("rotation", rotation)
       }); 
