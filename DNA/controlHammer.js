@@ -33,10 +33,11 @@
       });
       
       hammertime.on("pinch", (ev) => {
-        if (!this.markerVisible) { return; }
+      	if (!this.markerVisible) { return; }
+		  let initialScale = model.getAttribute("scale")
           let scale = {x:ev.scale, y:ev.scale, z:ev.scale}
-          model.setAttribute("scale", scale);
-		  model2.setAttribute("scale", scale);
+          model.setAttribute("scale", initialScale + scale);
+		  model2.setAttribute("scale", initialScale + scale);
 
       });
         },
