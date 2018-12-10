@@ -17,11 +17,13 @@
 			            var label = 'Show figure';
 			            //document.querySelector('a-marker').object3D.visible = true;
 			            document.getElementById('VisibleImage').innerHTML = '';
+					document.getElementById('flipVisibleImage').innerHTML = '';
 				    }
 				    else{
 			            var label = 'Hide figure';
 			            //document.querySelector('a-marker').object3D.visible = false;
 			            document.getElementById('VisibleImage').innerHTML = '<a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaA" foo></a-entity> <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaB"></a-entity>';
+			            document.getElementById('flipVisibleImage').innerHTML = '<a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 -1 0" scale="1" id="dnaA" foo></a-entity> <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 -1 0" scale="1" id="dnaB"></a-entity>';
 				    }
 			        document.getElementById('myInputButton').value = label;
                 }
@@ -51,7 +53,7 @@
         </a-marker>
 	    
 	<!-- Recognise upsidedown image -->
-	<a-marker id="VisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/Reverse/flipP.patt">
+	<a-marker id="flipVisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/Reverse/flipP.patt">
             <!-- Overlay dna -->
             <a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 -1 0" scale="1" id="dnaA"></a-entity>
             <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 -1 0" scale="1" id="dnaB"></a-entity>
