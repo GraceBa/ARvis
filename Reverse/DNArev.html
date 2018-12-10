@@ -44,10 +44,17 @@
         </a-assets>
 
         <!-- Recognise hex image -->
-        <a-marker id="VisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/Reverse/flipP.patt">
+        <a-marker id="VisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/Reverse/originalP.patt">
             <!-- Overlay dna -->
             <a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaA"></a-entity>
             <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaB"></a-entity>
+        </a-marker>
+	    
+	<!-- Recognise upsidedown image -->
+	<a-marker id="VisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/Reverse/flipP.patt">
+            <!-- Overlay dna -->
+            <a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 -1 0" scale="1" id="dnaA"></a-entity>
+            <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 -1 0" scale="1" id="dnaB"></a-entity>
         </a-marker>
 
         <!-- Initiate camera -->
