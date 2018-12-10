@@ -2,7 +2,7 @@
         init:function() {
           var element = document.querySelector('body');
           this.marker = document.getElementById('VisibleImage');
-          this.marker2 = document.getElementById('flipVisibleImage')';
+          this.marker2 = document.getElementById('flipVisibleImage');
           var model = document.getElementById('dnaA');
           var model2 = document.getElementById('dnaB');
           this.markerVisible = false
