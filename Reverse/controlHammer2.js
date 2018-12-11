@@ -1,4 +1,4 @@
-        AFRAME.registerComponent("foo",{
+        AFRAME.registerComponent("foo2",{
         init:function() {
           var element = document.querySelector('body');
           this.marker = document.getElementById('flipVisibleImage');
