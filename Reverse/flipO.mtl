@@ -1,5 +1,10 @@
-newmtl flipM
-Kd 1 1 1
-map_Kd null
-illum 2
+# Exported from 3D Builder
 
+newmtl Black
+Kd 0.000000 0.000000 0.000000
+
+newmtl White
+Kd 1.000000 1.000000 1.000000
+
+newmtl White
+Kd 1.000000 1.000000 1.000000
