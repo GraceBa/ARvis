@@ -29,9 +29,18 @@
 
         <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
-            <input type="text" id="userInput"/> <br />
+            <input type="text" id="userInput" /> <br />
             <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
             <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
+
+            <script>
+            var pressEnter = document.getElementById("userInput");
+            pressEnter.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    document.getElementById("selectButton").click();
+                }
+            });
+            </script>
         </div>
 
         <!-- display information on active model -->
