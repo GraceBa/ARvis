@@ -7,52 +7,50 @@
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' foo>
 
         <!-- Custom js events -->
-        <!-- Toggle model visibility -->
-        <div style='position: fixed; bottom: 10px; width:100%; text-align: center; z-index: 1;'>
-            <input onclick="toggleButton()" id="myInputButton" type="button" value="Hide figure">
-        </div>
+        <!-- Control model import -->
         <script type="text/javascript">
-                function toggleButton(){
-			        if(document.getElementById('myInputButton').value == 'Hide figure'){
-			            var label = 'Show figure';
-			            //document.querySelector('a-marker').object3D.visible = true;
-			            document.getElementById('VisibleImage').innerHTML = '';
-				    }
-				    else{
-			            var label = 'Hide figure';
-			            //document.querySelector('a-marker').object3D.visible = false;
-			            document.getElementById('VisibleImage').innerHTML = '<a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaA" foo></a-entity> <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaB"></a-entity>';
-				    }
-			        document.getElementById('myInputButton').value = label;
-                }
+            function selectModel() {
+                var display = document.getElementById("model");
+                var x = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.obj";
+                var y = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl";
+                var name = x.split("/");
+                var information = "current file is:" + name[name.length - 1];
+                document.getElementById('info').innerHTML = information;
+
+                display.setAttribute("obj-model", "obj: url(" + x + "); mtl: url(" + y + ");");
+            }
+
+            function hideModel() {
+                var display = document.getElementById("model");
+                display.setAttribute("obj-model", "obj: url(); mtl: url();");
+            }
         </script>
 
-        <!-- control scale and rotation 
+        <!-- Import model button -->
+        <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
+            <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
+            <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
+        </div>
+
+        <!-- display information on active model -->
+        <div style='position: fixed; bottom: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
+            <a id="info"></a>
+        </div>
+
+
+
+        <!-- control scale and rotation
         <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/hammer.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/controlHammer.js"></script> -->
 
-
-        <!-- Import object assets -->
-        <a-assets>
-            <!-- Chain A -->
-            <a-asset-item id="dna_chainAmtl" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl"></a-asset-item>
-            <a-asset-item id="dna_chainAobj" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.obj"></a-asset-item>
-
-            <!-- Chain B -->
-            <a-asset-item id="dna_chainBmtl" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.mtl"></a-asset-item>
-            <a-asset-item id="dna_chainBobj" src="https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj"></a-asset-item>
-        </a-assets>
-
         <!-- Recognise hex image -->
         <a-marker id="VisibleImage" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/hexP.patt">
-            <!-- Overlay dna -->
-            <a-entity obj-model="obj: #dna_chainAobj; mtl: #dna_chainAmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaA"></a-entity>
-            <a-entity obj-model="obj: #dna_chainBobj; mtl: #dna_chainBmtl;" shadow="recieve: false;" position="0 1 0" scale="1" id="dnaB"></a-entity>
+            <!-- Overlay object -->
+            <a-entity obj-model="obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);" shadow="recieve: false;" position="0 1 0" scale="1" id="model"></a-entity>
         </a-marker>
 
         <!-- Initiate camera -->
         <a-entity camera></a-entity>
     </a-scene>
-
 </body>
 </html>
