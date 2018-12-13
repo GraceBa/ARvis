@@ -10,14 +10,15 @@
         <!-- Control model import -->
         <script type="text/javascript">
             function selectModel() {
-                var display = document.getElementById("model");
-                var x = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.obj";
-                var y = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl";
-                var name = x.split("/");
-                var information = "current file is:" + name[name.length - 1];
+                var filename = document.getElementById("userInput").value;
+
+                var object = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/" + filename + ".obj";
+                var material = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/" + filename + ".mtl";
+                var information = "current file is: " + filename;
                 document.getElementById('info').innerHTML = information;
 
-                display.setAttribute("obj-model", "obj: url(" + x + "); mtl: url(" + y + ");");
+                var display = document.getElementById("model");
+                display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
             }
 
             function hideModel() {
@@ -28,6 +29,7 @@
 
         <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
+            <input type="text" id="userInput"/> <br />
             <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
             <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
         </div>
@@ -36,7 +38,6 @@
         <div style='position: fixed; bottom: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
             <a id="info"></a>
         </div>
-
 
 
         <!-- control scale and rotation
