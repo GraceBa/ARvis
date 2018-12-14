@@ -10,14 +10,59 @@
         <script type="text/javascript">
 //~~~~~~~~~~ import a model
             function selectModel() {
+                //take user input
                 var modelname = document.getElementById("userInput").value;
                 var markername = document.getElementById("markerInput").value;
+                
+                //*** if marker does not already exist, create it. ***
+                if (document.getElementById(markername) == null) {
+                    //input the name an location of the new marker
+                    var marker = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/" + markername + ".patt";
+                    //note the index of the new marker
+                    var markernumber = document.getElementsByTagName("a-marker").length;
+
+                    //create a new a-marker element
+                    var a_marker = document.createElement("a-marker");
+                    var element = document.getElementById("currentScene");
+                    element.appendChild(a_marker);
+
+                    //set id as marker name
+                    a_marker.setAttribute('id', markername);
+                    // set the preset
+                    a_marker.setAttribute('preset', 'custom');
+                    // set the type
+                    a_marker.setAttribute('type', 'pattern');
+                    // set the url
+                    a_marker.setAttribute('url', marker);
+
+                    //create a model entity for the marker
+                    var a_entity = document.createElement("a-entity");
+                    var element = document.getElementsByTagName("a-marker")[markernumber];
+                    element.appendChild(a_entity);
+
+                    //set id as index
+                    a_entity.setAttribute('id', markernumber.toString());
+                    //import empty model
+                    var newObjModel = "obj: url(); mtl: url();";
+                    a_entity.setAttribute("obj-model", newObjModel);
+                    //set the shadow
+                    a_entity.setAttribute("shadow", "recieve: false");
+                    //set the position
+                    a_entity.setAttribute("position", "0 1 0");
+                    //set the scale
+                    a_entity.setAttribute("scale", "1");
+
+                    var information = "Loaded marker: " + markername;
+                    document.getElementById('info').innerHTML = information;
+                }
+
+                //*** set model on marker ***
 
                 var object = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Models/" + modelname + ".obj";
                 var material = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Models/" + modelname + ".mtl";
                 var information = "Loaded model: " + modelname;
                 document.getElementById('info').innerHTML = information;
-
+                //define the selected marker
                 var index = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
                 var display = document.getElementById(index);
                 display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
@@ -25,61 +70,21 @@
 
 //~~~~~~~~~~ remove a model
             function hideModel() {
-                var display = document.getElementById("model");
+                var markername = document.getElementById("markerInput").value;
+                //define the selected marker
+                var index = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
+                var display = document.getElementById(index);
+                //hide model
                 display.setAttribute("obj-model", "obj: url(); mtl: url();");
             }
 
-//~~~~~~~~~~ add a new marker
-            function selectMarker() {
-                //input the name an location of the new marker
-                var markername = document.getElementById("markerInput").value;
-                var marker = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/" + markername + ".patt";
-             
-                //create a new a-marker element
-                var a_marker = document.createElement("a-marker");
-                var element = document.getElementById("currentScene");
-                element.appendChild(a_marker);
-
-                var markernumber = 1;
-
-                //set id as marker name
-                a_marker.setAttribute('id', markername);
-                // set the preset
-                a_marker.setAttribute('preset', 'custom');
-                // set the type
-                a_marker.setAttribute('type', 'pattern');
-                // set the url
-                a_marker.setAttribute('url', marker);
-
-                //create a model entity for the marker
-                var a_entity = document.createElement("a-entity");
-                var element = document.getElementsByTagName("a-marker")[markernumber];
-                element.appendChild(a_entity);
-
-                //set id as index
-                a_entity.setAttribute('id', markernumber.toString());
-                //import empty model
-                var newObjModel = "obj: url(); mtl: url();";
-                a_entity.setAttribute("obj-model",newObjModel);
-                //set the shadow
-                a_entity.setAttribute("shadow","recieve: false");
-                //set the position
-                a_entity.setAttribute("position", "0 1 0");
-                //set the scale
-                a_entity.setAttribute("scale", "1");
-
-                var information = "Loaded marker: " + markername;
-                document.getElementById('info').innerHTML = information;
-            }
         </script>
 
         <!-- User Interaction -->
         <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
-            Marker Name:<input type="text" id="markerInput" value="hexP" />
-            <input onclick="selectMarker()" type="button" value="import new marker" id="markerButton"> <br />
-
-            Model Name: <input type="text" id="userInput" value="dna_chainA"/> <br />
+            Marker: <input type="text" id="markerInput" value="hexP" /> <br />
+            Model : <input type="text" id="userInput" value="dna_chainA"/> <br />
             <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
             <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
 
@@ -104,9 +109,9 @@
     <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/controlHammer.js"></script> -->
  
         <!-- Recognise image -->
-        <a-marker id="smileyP" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/smileyP.patt">
+        <a-marker id="hexP" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/hexP.patt">
             <!-- Overlay object -->
-            <a-entity obj-model="obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);" shadow="recieve: false;" position="0 1 0" scale="1" id="0"></a-entity>
+            <a-entity obj-model="obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);" shadow="recieve: false;" position="0 1 0" scale="1" id="0"></a-entity>
         </a-marker>
 
         <!-- Initiate camera -->
