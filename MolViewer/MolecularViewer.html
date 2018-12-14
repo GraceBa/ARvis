@@ -7,8 +7,8 @@
     <a-scene id="currentScene" embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' foo>
 
         <!-- Custom js events -->
-        <!-- Control model import -->
         <script type="text/javascript">
+//~~~~~~~~~~ import a model
             function selectModel() {
                 var filename = document.getElementById("userInput").value;
 
@@ -21,11 +21,13 @@
                 display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
             }
 
+//~~~~~~~~~~ remove a model
             function hideModel() {
                 var display = document.getElementById("model");
                 display.setAttribute("obj-model", "obj: url(); mtl: url();");
             }
 
+//~~~~~~~~~~ add a new marker
             function selectMarker() {
                 //input the name an location of the new marker
                 var markername = document.getElementById("markerInput").value;
@@ -45,12 +47,7 @@
                 // set the url
                 a_marker.setAttribute('url', marker);
 
-                //document.getElementsByTagName("a-marker")[markernumber].setAttribute('url', marker);
-
                 //create a model entity for the marker
-          /*      var a_entity = document.createElement("a-box");
-                var element = document.getElementById(markernumber.toString());
-                element.appendChild(a_entity);*/
                 var a_entity = document.createElement("a-entity");
                 var element = document.getElementsByTagName("a-marker")[markernumber];
                 element.appendChild(a_entity);
@@ -66,60 +63,16 @@
                 a_entity.setAttribute("position", "0 1 0");
                 //set the scale
                 a_entity.setAttribute("scale", "1"); 
-  
-
-                /*
-                                //create a new a-marker element
-                var a_marker = document.createElement("a-marker");
-                // set the file name as id
-                var newId = document.createAttribute("id");
-                newId.value = markername;
-                a_marker.setAttribute(newId);
-                // set the preset
-                var newPreset = document.createAttribute("preset");
-                newPreset.value = "custom";
-                a_marker.setAttribute(newPreset);
-                // set the type
-                var newType = document.createAttribute("type");
-                newType.value = "pattern";
-                a_marker.setAttribute(newType);
-                // set the url
-                var newUrl = document.createAttribute("url");
-                newUrl.value = marker;
-                a_marker.setAttribute(newUrl);
-
-                //create a model entity for the marker
-                var a_entity = document.createElement("a-entity");
-                //import default model
-                var newObjModel = document.createAttribute("obj-model");
-                newObjModel.value = "obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);";
-                a_entity.setAttribute(newObjModel);
-                //set the shadow
-                var newShadow = document.createAttribute("shadow");
-                newShadow.value = "recieve: false;";
-                a_entity.setAttribute(newShadow);
-                //set the position
-                var newPosition = document.createAttribute("position");
-                newPosition.value = "0 1 0";
-                a_entity.setAttribute(newShadow);
-
-                //put the new a-entity element in the a-marker
-                var element = document.getElementById(newId);
-                element.appendChild(a_entity);
-
-                //put the new a-marker element in the scene
-                var element1 = document.getElementById("currentScene");
-                element1.appendChild(a_marker);
-                */
-
-
-                
             }
         </script>
 
+        <!-- User Interaction -->
         <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
-            <input type="text" id="userInput" /> <br />
+            Marker Name:<input type="text" id="markerInput" value="hexP" />
+            <input onclick="selectMarker()" type="button" value="select marker" id="markerButton"> <br />
+
+            Model Name: <input type="text" id="userInput" /> <br />
             <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
             <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
 
@@ -132,22 +85,6 @@
             });
             </script>
         </div>
-
-        <!-- Marker select button -->
-        <div style='position: fixed; bottom: 40px; left: 10px; width:100%; text-align: left; z-index: 1;'>
-            <input type="text" id="markerInput" value="hexP"/> <br />
-            <input onclick="selectMarker()" type="button" value="select marker" id="markerButton"> <br />
-
-            <script>
-            var pressEnter = document.getElementById("markerInput");
-            pressEnter.addEventListener("keyup", function (event) {
-                if (event.keyCode === 13) {
-                    document.getElementById("markerButton").click();
-                }
-            });
-            </script>
-        </div>
-
 
         <!-- display information on active model -->
         <div style='position: fixed; bottom: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
