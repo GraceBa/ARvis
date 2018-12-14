@@ -10,20 +10,17 @@
         <script type="text/javascript">
 //~~~~~~~~~~ import a model
             function selectModel() {
-                var filename = document.getElementById("userInput").value;
+                var modelname = document.getElementById("userInput").value;
                 var markername = document.getElementById("markerInput").value;
 
-                var object = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/" + filename + ".obj";
-                var material = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/" + filename + ".mtl";
-                var information = "current file is: " + filename;
+                var object = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Models/" + modelname + ".obj";
+                var material = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Models/" + modelname + ".mtl";
+                var information = "Loaded model: " + modelname;
                 document.getElementById('info').innerHTML = information;
 
                 var index = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
                 var display = document.getElementById(index);
                 display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
-
-                var information = "Index is: " + index;
-                document.getElementById('info').innerHTML = information;
             }
 
 //~~~~~~~~~~ remove a model
@@ -62,14 +59,17 @@
                 //set id as index
                 a_entity.setAttribute('id', markernumber.toString());
                 //import empty model
-                var newObjModel = "obj: url(); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);";
+                var newObjModel = "obj: url(); mtl: url();";
                 a_entity.setAttribute("obj-model",newObjModel);
                 //set the shadow
                 a_entity.setAttribute("shadow","recieve: false");
                 //set the position
                 a_entity.setAttribute("position", "0 1 0");
                 //set the scale
-                a_entity.setAttribute("scale", "1"); 
+                a_entity.setAttribute("scale", "1");
+
+                var information = "Loaded marker: " + markername;
+                document.getElementById('info').innerHTML = information;
             }
         </script>
 
