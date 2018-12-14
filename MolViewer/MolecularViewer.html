@@ -66,6 +66,7 @@
                 var index = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
                 var display = document.getElementById(index);
                 display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
+                document.getElementById('info').innerHTML = index;
             }
 
 //~~~~~~~~~~ remove a model
