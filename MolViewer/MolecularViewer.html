@@ -11,14 +11,19 @@
 //~~~~~~~~~~ import a model
             function selectModel() {
                 var filename = document.getElementById("userInput").value;
+                var markername = document.getElementById("markerInput").value;
 
                 var object = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/" + filename + ".obj";
                 var material = "https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/" + filename + ".mtl";
                 var information = "current file is: " + filename;
                 document.getElementById('info').innerHTML = information;
 
-                var display = document.getElementById("model");
+                var index = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
+                var display = document.getElementById(index);
                 display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
+
+                var information = "Index is: " + index;
+                document.getElementById('info').innerHTML = information;
             }
 
 //~~~~~~~~~~ remove a model
@@ -40,6 +45,8 @@
 
                 var markernumber = 1;
 
+                //set id as marker name
+                a_marker.setAttribute('id', markername);
                 // set the preset
                 a_marker.setAttribute('preset', 'custom');
                 // set the type
@@ -54,8 +61,8 @@
 
                 //set id as index
                 a_entity.setAttribute('id', markernumber.toString());
-                //import default model
-                var newObjModel = "obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);";
+                //import empty model
+                var newObjModel = "obj: url(); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);";
                 a_entity.setAttribute("obj-model",newObjModel);
                 //set the shadow
                 a_entity.setAttribute("shadow","recieve: false");
@@ -70,9 +77,9 @@
         <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
             Marker Name:<input type="text" id="markerInput" value="hexP" />
-            <input onclick="selectMarker()" type="button" value="select marker" id="markerButton"> <br />
+            <input onclick="selectMarker()" type="button" value="import new marker" id="markerButton"> <br />
 
-            Model Name: <input type="text" id="userInput" /> <br />
+            Model Name: <input type="text" id="userInput" value="dna_chainA"/> <br />
             <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
             <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
 
@@ -97,9 +104,9 @@
     <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/controlHammer.js"></script> -->
  
         <!-- Recognise image -->
-        <a-marker id="0" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/smileyP.patt">
+        <a-marker id="smileyP" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/smileyP.patt">
             <!-- Overlay object -->
-            <a-entity obj-model="obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);" shadow="recieve: false;" position="0 1 0" scale="1" id="model"></a-entity>
+            <a-entity obj-model="obj: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainB.obj); mtl: url(https://raw.githubusercontent.com/GraceBa/ARvis/master/DNA/dna_chainA.mtl);" shadow="recieve: false;" position="0 1 0" scale="1" id="0"></a-entity>
         </a-marker>
 
         <!-- Initiate camera -->
