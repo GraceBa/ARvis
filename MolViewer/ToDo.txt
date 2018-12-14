@@ -1,9 +1,12 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TO DO:
 import any number of files		*
-	or combine before import
+	do I need to combine files?
 create model repository			*
 pull model from source			*
+control scale/position (for model)	*
+check if file actually exists		*
+	
 
 done
 /convert file input to -> string		
@@ -12,8 +15,12 @@ done
 /have dynamic buttons to toggle	
 /recieve file input from -> user
 /take text input
+/different number of targets	
+/how to specify which target is which?		
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Would be nice...
 get info to fade after a bit		nah.
+user control scale			*
+make js in separate file		*
 /Press enter when entering text		
