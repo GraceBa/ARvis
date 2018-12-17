@@ -18,55 +18,60 @@
                 if (document.getElementById(markername) == null) {
                     //input the name an location of the new marker
                     var marker = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/" + markername + ".patt";
-                    //note the index of the new marker
-                    var markernumber = document.getElementsByTagName("a-marker").length;
 
-                    //create a new a-marker element
-                    var a_marker = document.createElement("a-marker");
-                    var element = document.getElementById("currentScene");
-                    element.appendChild(a_marker);
+                    //if (UrlExists(marker)) {
+                        //note the index of the new marker
+                        var markernumber = document.getElementsByTagName("a-marker").length;
+                        //create a new a-marker element
+                        var a_marker = document.createElement("a-marker");
+                        var element = document.getElementById("currentScene");
+                        element.appendChild(a_marker);
 
-                    //set id as marker name
-                    a_marker.setAttribute('id', markername);
-                    // set the preset
-                    a_marker.setAttribute('preset', 'custom');
-                    // set the type
-                    a_marker.setAttribute('type', 'pattern');
-                    // set the url
-                    a_marker.setAttribute('url', marker);
+                        //set id as marker name
+                        a_marker.setAttribute('id', markername);
+                        // set the preset
+                        a_marker.setAttribute('preset', 'custom');
+                        // set the type
+                        a_marker.setAttribute('type', 'pattern');
+                        // set the url
+                        a_marker.setAttribute('url', marker);
 
-                    //create a model entity for the marker
-                    var a_entity = document.createElement("a-entity");
-                    var element = document.getElementsByTagName("a-marker")[markernumber];
-                    element.appendChild(a_entity);
+                        //create a model entity for the marker
+                        var a_entity = document.createElement("a-entity");
+                        var element = document.getElementsByTagName("a-marker")[markernumber];
+                        element.appendChild(a_entity);
 
-                    //set id as index
-                    a_entity.setAttribute('id', markernumber.toString());
-                    //import empty model
-                    var newObjModel = "obj: url(); mtl: url();";
-                    a_entity.setAttribute("obj-model", newObjModel);
-                    //set the shadow
-                    a_entity.setAttribute("shadow", "recieve: false");
-                    //set the position
-                    a_entity.setAttribute("position", "0 1 0");
-                    //set the scale
-                    a_entity.setAttribute("scale", "1");
+                        //set id as index
+                        a_entity.setAttribute('id', markernumber.toString());
+                        //import empty model
+                        var newObjModel = "obj: url(); mtl: url();";
+                        a_entity.setAttribute("obj-model", newObjModel);
+                        //set the shadow
+                        a_entity.setAttribute("shadow", "recieve: false");
+                        //set the position
+                        a_entity.setAttribute("position", "0 1 0");
+                        //set the scale
+                        a_entity.setAttribute("scale", "1");
 
-                    var information = "Loaded marker: " + markername;
-                    document.getElementById('info').innerHTML = information;
+                        var information = "Loaded marker: " + markername;
+                        document.getElementById('info').innerHTML = information;
+                    /*}
+                    else {
+                        return;
+                    }*/
                 }
 
                 //*** set model on marker ***
-
+                //load model
                 var object = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Models/" + modelname + ".obj";
                 var material = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Models/" + modelname + ".mtl";
                 var information = "Loaded model: " + modelname;
                 document.getElementById('info').innerHTML = information;
+
                 //define the selected marker
                 var index = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
                 var display = document.getElementById(index);
                 display.setAttribute("obj-model", "obj: url(" + object + "); mtl: url(" + material + ");");
-                document.getElementById('info').innerHTML = index;
             }
 
 //~~~~~~~~~~ remove a model
@@ -78,6 +83,37 @@
                 //hide model
                 display.setAttribute("obj-model", "obj: url(); mtl: url();");
             }
+
+//~~~~~~~~~~ Check for non-existent pattern files
+/*            // from https://xhr.spec.whatwg.org/
+            function UrlExists(url) {
+                var http = new XMLHttpRequest();
+                trial = "";
+                http.onload = function () {
+                    trial = returnStatus(this.status);
+                }
+                http.open('HEAD', url, true);
+                http.send();
+
+                if (trial) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            function returnStatus(status) {
+                if (status === 200) {
+                    console.log('file exists');
+                    return true;
+                }
+                else {
+                    console.log('file does not exist! status: ' + status);
+                    return false;
+                }
+            }*/
+
+
 
         </script>
 
