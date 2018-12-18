@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script src="ngl.js"></script>
+    <script>
+
+        var file = "rcsb://1crn";
+        var stage;
+        //var stage = new NGL.Stage("viewport");
+
+        function changeFile() {
+            file = "rcsb://" + document.getElementById("fileSelect").value;
+            document.getElementById("viewport").innerHTML = '';
+            var stage = new NGL.Stage("viewport");
+            stage.loadFile(file, { defaultRepresentation: true });
+            document.getElementById("info").innerHTML = file;
+        }
+
+            document.addEventListener("DOMContentLoaded", function () {
+            var stage = new NGL.Stage("viewport");
+            stage.loadFile(file, { defaultRepresentation: true });
+            document.getElementById("info").innerHTML = file;
+        });
+
+     
+
+    </script>
+    <div id="viewport" style="width:400px; height:300px;"></div>
+    <input type="text" id="fileSelect" value="4ewn" /> <br/>
+    <input type="button" onclick="changeFile()" value="load" /> <br/>
+
+    <div style='position: fixed; bottom: 10px; right: 10px; width:100%; text-align: right; z-index: 1;'>
+        <a id="info"></a>
+    </div>
+</body>
+</html>
