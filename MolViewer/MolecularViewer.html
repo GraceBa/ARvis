@@ -1,25 +1,39 @@
 <!doctype HTML>
 <html>
-<script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/aframe-ar.js"></script>
+    <meta charset="UTF-8">
 
 <body style='margin : 0px; overflow: hidden;'>
     <a-scene id="currentScene" embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' foo>
 
         <!-- Custom js events -->
         <script type="text/javascript">
+
+//~~~~~~~~~~ Check for non-existent pattern files
+            function tryme() {
+                var markername = document.getElementById("markerInput").value;
+                var marker = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/" + markername + ".patt";
+                var http = new XMLHttpRequest();
+                http.onload = function () {
+                    selectModel(this.status, marker);
+                }
+                http.open('HEAD', marker, true);
+                http.send(); 
+                //selectModel(200,marker)
+            }
+
+
 //~~~~~~~~~~ import a model
-            function selectModel() {
+            function selectModel(status, marker) {
                 //take user input
                 var modelname = document.getElementById("userInput").value;
                 var markername = document.getElementById("markerInput").value;
-                
-                //*** if marker does not already exist, create it. ***
-                if (document.getElementById(markername) == null) {
-                    //input the name an location of the new marker
-                    var marker = "https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/" + markername + ".patt";
 
-                    //if (UrlExists(marker)) {
+                if (status === 200) {
+                    //*** if marker does not already exist, create it. ***
+                    if (document.getElementById(markername) == null) {
+                        //if (UrlExists(marker)) {
                         //note the index of the new marker
                         var markernumber = document.getElementsByTagName("a-marker").length;
                         //create a new a-marker element
@@ -55,10 +69,7 @@
 
                         var information = "Loaded marker: " + markername;
                         document.getElementById('info').innerHTML = information;
-                    /*}
-                    else {
-                        return;
-                    }*/
+                    }
                 }
 
                 //*** set model on marker ***
@@ -84,35 +95,28 @@
                 display.setAttribute("obj-model", "obj: url(); mtl: url();");
             }
 
-//~~~~~~~~~~ Check for non-existent pattern files
-/*            // from https://xhr.spec.whatwg.org/
-            function UrlExists(url) {
-                var http = new XMLHttpRequest();
-                trial = "";
-                http.onload = function () {
-                    trial = returnStatus(this.status);
-                }
-                http.open('HEAD', url, true);
-                http.send();
 
-                if (trial) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
+//~~~~~~~~~~ Molecular viewer?? ngl
+ /*           var file = "rcsb://1crn";
+            var stage;
+            var represent = "cartoon";
+
+            function changeFile() {
+                file = "rcsb://" + document.getElementById("fileSelect").value;
+                document.getElementById("viewport").innerHTML = '';
+                var stage = new NGL.Stage("viewport");
+                stage.loadFile(file).then(function (o) {
+                    o.addRepresentation(represent);
+                    o.autoView();
+                });
+                //document.getElementById("info").innerHTML = file;
             }
-            function returnStatus(status) {
-                if (status === 200) {
-                    console.log('file exists');
-                    return true;
-                }
-                else {
-                    console.log('file does not exist! status: ' + status);
-                    return false;
-                }
-            }*/
 
+            document.addEventListener("DOMContentLoaded", function () {
+                var stage = new NGL.Stage("viewport");
+                stage.loadFile(file, { defaultRepresentation: true });
+                document.getElementById("info").innerHTML = file;
+            }); */
 
 
         </script>
@@ -121,9 +125,13 @@
         <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
             Marker: <input type="text" id="markerInput" value="hexP" /> <br />
-            Model : <input type="text" id="userInput" value="dna_chainA"/> <br />
-            <input onclick="selectModel()" type="button" value="import model" id="selectButton"> <br />
-            <input onclick="hideModel()" type="button" value="remove model" id="hideButton">
+            Model : <input type="text" id="userInput" value="dna_chainA" /> <br />
+            <input onclick="tryme()" type="button" value="import model" id="selectButton"> <br />
+            <input onclick="hideModel()" type="button" value="remove model" id="hideButton"> <br />
+
+            <!--Molecular viewer?? ngl
+            <input type="text" id="fileSelect" value="1crn" /> <br />
+            <input type="button" onclick="changeFile()" value="load" id="fileChange" /> <br /> -->
 
             <script>
             var pressEnter = document.getElementById("userInput");
@@ -149,9 +157,8 @@
 
 
         <!-- control scale and rotation
-    <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/hammer.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/controlHammer.js"></script> -->
- 
+        <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/hammer.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/GraceBa/ARvis/DNA/controlHammer.js"></script> -->
         <!-- Recognise image -->
         <a-marker id="hexP" preset="custom" type="pattern" url="https://raw.githubusercontent.com/GraceBa/ARvis/master/MolViewer/Markers/hexP.patt">
             <!-- Overlay object -->
