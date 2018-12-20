@@ -1,0 +1,87 @@
+<!doctype HTML>
+
+<html>
+<body>
+
+    <!-- Control model import -->
+    <script type="text/javascript">
+        function selectModel() {
+            var x = "https://charlespaddockzoo.org/wp-content/uploads/2013/05/Prehensile-Tailed-Porcupine.jpg";
+            var name = x.split("/");
+            var information = "current file is:" + name[name.length-1];
+    //         document.getElementById('info').innerHTML = information;
+
+            var im = document.getElementById("image");
+            im.setAttribute("src",x);
+        }
+
+        function addImage() {
+            //create a new image element
+            var newImage = document.createElement("img");
+
+            var element = document.getElementById("here");
+            element.appendChild(newImage);
+
+            //import default model
+            file = "https://charlespaddockzoo.org/wp-content/uploads/2013/05/Prehensile-Tailed-Porcupine.jpg";
+        //      var testExist = new ActiveXObject("Microsoft.XMLHTTP");
+        //      testExist.open('GET', file, false);
+        //      testExist.send();
+
+            // var information = testExist.status;
+            // document.getElementById('info').innerHTML = information;
+
+            //     if (testExist.status != 404) {
+            var number = document.getElementsByTagName("img").length;
+            document.getElementsByTagName("img")[number-1].setAttribute('src', file);
+        }
+
+        function tryme() {
+            url = document.getElementById("textin").value;
+            var http = new XMLHttpRequest();
+            http.onload = function () {
+                returnStatus(this.status,url);
+            }
+            http.open('HEAD', url, true);
+            http.send();
+
+            //if it exists, execute function
+         /*   if (document.getElementById("hidden").innerHTML == "true") {
+                document.getElementsByTagName("img")[0].setAttribute('src', url);
+            }
+            console.log("still going...");*/
+        }
+
+        function returnStatus(status,url) {
+            if (status === 200) {
+                document.getElementById("hidden").innerHTML = 'true';
+                document.getElementsByTagName("img")[0].setAttribute('src', url);
+            }
+            else {
+                document.getElementById("hidden").innerHTML = 'false';
+                while (document.getElementById("hidden").innerHTML == 'true') {
+                    var wait = "waiting";
+                }
+            }
+        }
+    </script>
+
+
+    <input onclick="selectModel()" type="button" value="import model" /> <br/>
+    <input type="text" value="https://images.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" id="textin" size="120"/><br/>
+    <input onclick="tryme();" type="button" value="try me" /> <br/>
+
+    <div id="here">
+        <img id="image" src="https://images.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="sorry..." height="200" width="300" />
+    </div>
+
+    <input onclick="addImage()" type="button" value="add image" />
+
+    <div style='position: fixed; bottom: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
+        <a id="info"></a>
+    </div>
+    <div style='position: fixed; bottom: 10px; left: -10px; width:100%; text-align: right; z-index: 1;' id="placeholder">
+        <a id="hidden" value="false">false</a>
+    </div>
+</body>
+</html>
