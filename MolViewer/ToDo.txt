@@ -5,7 +5,7 @@ import any number of files		*
 create model repository			*
 pull model from source			*
 control scale/position (for model)	*
-check if file actually exists		*
+change file location for loading	*
 	
 
 done
@@ -16,7 +16,8 @@ done
 /recieve file input from -> user
 /take text input
 /different number of targets	
-/how to specify which target is which?		
+/how to specify which target is which?	
+/check if file actually EXISTS			
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Would be nice...
