@@ -76,7 +76,8 @@
                 var modelname = document.getElementById("userInput").value;
                 //define the selected marker
                 var identity = markername + modelname;
-                document.getElementById("info").innerHTML = document.getElementById(identity);
+                information = document.getElementById(markername + modelname);
+                document.getElementById("info").innerHTML = information;
                 if(document.getElementById(identity)) {
                     var element = document.getElementById(identity);
                     element.parentNode.removeChild(element);
