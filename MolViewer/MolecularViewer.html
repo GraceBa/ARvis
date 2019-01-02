@@ -29,12 +29,9 @@
                 var modelname = document.getElementById("userInput").value;     //name of 3D AR model
                 var markername = document.getElementById("markerInput").value;  //name of target image marker
 
-                if (status === 200) { //if the new marker exists
-
+                if((status === 200) && !(document.getElementById(markername + modelname))){ //if the marker location exists and does not already have the called model
                     //*** if marker does not already exist, create it. ***
                     if (document.getElementById(markername) == null) {
-                        //note the index of the new marker
-                        var markernumber = document.getElementsByTagName("a-marker").length;
                         //create a new a-marker element
                         var a_marker = document.createElement("a-marker");
                         var element = document.getElementById("currentScene");
@@ -47,12 +44,6 @@
                         a_marker.setAttribute('type', 'pattern');
                         // set the url
                         a_marker.setAttribute('url', marker);
-
-                        var information = "Loaded marker: " + markername;
-                        document.getElementById('info').innerHTML = information;
-                    }
-                    else { //otherwise find the existing markernumber
-
                     }
 
                     //*** set model on marker ***
@@ -99,7 +90,6 @@
                     var identity = document.getElementById(markername).getElementsByTagName('a-entity')[0].id;
                     var element = document.getElementById(identity);
                     element.parentNode.removeChild(element);
-                    document.getElementById('info').innerHTML = i;
                 }
             }
 
@@ -125,17 +115,17 @@
                 document.getElementById("info").innerHTML = file;
             }); */
 
-
         </script>
 
         <!-- User Interaction -->
-        <!-- Import model button -->
         <div style='position: fixed; top: 10px; left: 10px; width:100%; text-align: left; z-index: 1;'>
+            <!-- Text input -->
             Marker: <input type="text" id="markerInput" value="hexP" /> <br />
             Model : <input type="text" id="userInput" value="dna_chainA" /> <br />
+            <!-- Buttons -->
             <input onclick="tryme()" type="button" value="import model" id="selectButton"> <br />
             <input onclick="hideModel()" type="button" value="remove model" id="hideButton"> <br />
-            <input onclick="clearMarker()" type="button" value="clear marker" id="clearButton" /><br/>
+            <input onclick="clearMarker()" type="button" value="clear marker" id="clearButton" /><br />
 
             <script>
             // recognise text submission via Enter key -> For adding markers
